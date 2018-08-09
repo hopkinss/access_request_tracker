@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+    {% block content %}
+  <h1>test</h1>
+  {% comment %} here is where the query happens {% endcomment %}
+
+  <div>
+{#    <form  method="post">#}
+{#        {% csrf_token %}#}
+{#        <label for="your_name">Your name: </label>#}
+{#        <input id="your_name" type="text" name="your_name">#}
+{#        <input type="submit" value="OK">#}
+{#    </form>#}
+    <form method="post" id="trackForm"  protocols-url="{% url 'ajax_load_protocols' %}" >
+        {% csrf_token %}
+        {{ form.as_table }}
+
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_project").change(function () {
+      var url = $("#trackForm").attr("protocols-url");
+      var productId = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'protocols': productId
+        },
+        success: function (data) {
+          $("#id_protocol").html(data);
+        }
+      });
+
+    });
+  </script>
+
+{% endblock %}
