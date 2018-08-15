@@ -5,8 +5,10 @@ from trackapp.models import CS096,FileShare,UserAccess,Product,Protocol,PrivActi
 class CS096Form(ModelForm):
     class Meta:
         model=CS096
-        fields=['project','protocol','ecms_link','requestor','approver']
+        fields=['project','protocol','requestor','approver']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['protocol'].queryset = Protocol.objects.none()
+        self.fields['requestor'].widget.attrs.update({'class': "input-class1"})
+        self.fields['approver'].widget.attrs.update({'class': "input-class1"})
+

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
     {% block content %}
   <div >
-    <h4>Enter a new access request</h4>
+    <h4>Update request</h4>
     <form method="post" id="trackForm"   protocols-url="{% url 'ajax_load_protocols' %}" >
         {% csrf_token %}
 
@@ -44,9 +44,6 @@
                         </td>
                         <td align="center" style="padding-top: 10px;">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                        </td>
-                        <td id="t1">
-
                         </td>
                     </tr>
                 </table>

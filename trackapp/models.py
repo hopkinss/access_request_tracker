@@ -27,19 +27,25 @@ class Protocol(models.Model):
 class CS096(models.Model):
     project=models.ForeignKey(Product,on_delete=models.SET_NULL,null=True)
     protocol=models.ForeignKey(Protocol,on_delete=models.SET_NULL,null=True)
-    ecms_link=models.URLField(blank=True)
     request_date=models.DateTimeField(auto_now=True)
-    requestor=models.CharField(max_length=100)
-    approver=models.CharField(max_length=100)
+    requestor=models.CharField(max_length=100,null=True)
+    approver=models.CharField(max_length=100,null=True)
+
+    def get_date(self):
+        return self.request_date.strftime("%d-%b-%Y")
 
 
 class FileShare(models.Model):
     path = models.CharField(max_length=1000)
     group=models.CharField(max_length=100)
     action=models.CharField(max_length=10,
-                            choices=[(i,i.value) for i in PrivActions ])
+                            # choices=[(i,i.value) for i in PrivActions ]
+                            choices=[("Grant",1)]
+                            )
     priv=models.CharField(max_length=10,
-                          choices=[(i,i.value) for i in Privs])
+                          choices=[("Modify",1)]
+                          # choices=[(i,i.value) for i in Privs]
+                          )
     cs096=models.ForeignKey(CS096,on_delete=models.CASCADE)
 
 
