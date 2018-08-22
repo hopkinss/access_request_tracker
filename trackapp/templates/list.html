@@ -1,10 +1,11 @@
 {% extends "base.html" %}
     {% block content %}
+{#        {% load render_table from django_tables2 %}#}
   {% comment %} here is where the query happens {% endcomment %}
  <h4>SAS Server Access Requests</h4>
 
 
-
+{#{% render_table entries %}#}
             <table width="50%">
             <tr><th>Protocol</th><th>Product</th><th>Requestor</th><th>Approver</th><th>Date executed</th><th></th></tr>
                 {% for e in entries %}
@@ -14,14 +15,17 @@
                         <td>{{ e.requestor }}</td>
                         <td>{{ e.approver }}</td>
                         <td>{{ e.get_date }} </td>
-                        <td>
+                        <td align="right">
                             <a href="{%  url 'entry_update' e.id %}"><button><i class="fa fa-edit" style="color: #79aec8;" ></i></button></a>
                             <a href="{%  url 'entry_delete' e.id %}"><button><i class="fa fa-trash" style="color: #79aec8;" ></i></button></a>
                         </td>
                     </tr>
 
+
+
                 {% endfor %}
             </table>
+
 
 
 {% endblock %}

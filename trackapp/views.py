@@ -7,7 +7,11 @@ from trackapp.models import *
 from django.utils import timezone
 from django import  http
 from django.views.generic.edit import FormView
-
+from django_tables2 import RequestConfig
+from .tables import CS096Table
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from .serializers import ProductSerializer,ProtocolSerializer
 
 from trackapp.forms import CS096Form
 
@@ -16,11 +20,17 @@ from django.views.generic import ListView, CreateView, UpdateView,DetailView,Del
 from django.urls import reverse_lazy
 from .models import Protocol,Product,CS096
 
+# Display a list of records
+class CS096ListView(ListView):
+    model = CS096
+    template_name = 'list.html'
+    queryset=CS096.objects.all().order_by('project')
+    context_object_name = 'entries'
 
+
+# Add a new recordd and display the list
 class CS096CreateView(CreateView):
     model = CS096
-
-    # fields=['project','protocol','ecms_link','requestor','approver']
     form_class = CS096Form
     template_name = 'index.html'
     success_url = reverse_lazy('entry_list')
@@ -29,12 +39,7 @@ class CS096CreateView(CreateView):
         return http.HttpResponse(form.fields)
 
 
-class CS096ListView(ListView):
-    model = CS096
-    template_name = 'list.html'
-    queryset = CS096.objects.all()
-    context_object_name = 'entries'
-
+# Update existing record and return list
 class CS096UpdateView(UpdateView):
     model = CS096
     template_name = 'details.html'
@@ -42,12 +47,13 @@ class CS096UpdateView(UpdateView):
     queryset =  CS096.objects.filter()
     success_url = reverse_lazy('entry_list')
 
-
+# AJAX insert dependent protocols based on selected  product
 def load_protocols(request):
     id = request.GET.get('protocols')
     protocols=Protocol.objects.filter(product_id=id)
     return render(request, 'dropdown.html', {'protocols': protocols})
 
+# Delete a record and return list
 class CS096DeleteView(DeleteView):
     template_name = 'delete.html'
     form_class = CS096Form
@@ -71,3 +77,16 @@ class CS096DeleteView(DeleteView):
 #         return render(request,'index.html',{'form':form})
 
 
+class ProductViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class ProtocolViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Protocol
+    serializer_class = ProtocolSerializer

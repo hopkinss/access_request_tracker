@@ -1,20 +1,23 @@
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.urls import path
-# from trackapp.views import main_view
+import django.contrib.auth.views
 from . import views
 from .models import CS096
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'product', views.ProductViewSet)
+
 
 
 urlpatterns = [
-    # url(r'^$',
-    #     main_view,
-    #     name="index"),
-    #     url(r'^list/', views.CS096ListView.as_view(), name='entry_list'),
+
         path('', views.CS096ListView.as_view(), name='entry_list'),
-        # path('list/', views.CS096ListView.as_view(), name='entry_list'),
         path('add/', views.CS096CreateView.as_view(), name='entry_add'),
         path('details/<int:pk>/',views.CS096UpdateView.as_view(), name='entry_update'),
-        # url(r'^details/<int:pk>/', views.CS096UpdateView.as_view(), name='entry_update'),
         path('ajax/load-protocols/', views.load_protocols, name='ajax_load_protocols'),
         path('delete/<int:pk>/',views.CS096DeleteView.as_view(), name='entry_delete'),
+        url(r'^', include(router.urls)),
+        url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+
 ]

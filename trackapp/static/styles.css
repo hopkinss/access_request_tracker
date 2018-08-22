@@ -74,20 +74,21 @@ ul.categories li {
 }
 
 table {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;font-size: smaller;
 }
 
 td,th {
-    padding-right: 20px;
+    padding-right: 5px;
 
 }
 
+tr:nth-child(even) {background: #c4dce8;}
 
 tr:hover {color: #3875d7;}
 
 th {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     text-align: left;
     background-color: #4CAF50;
     color: white;
@@ -99,3 +100,5 @@ th {
 
 .input-class1{width: 500px;color:#3875d7;font-size: smaller;}
 h4 {font-family: "Droid Sans";font-variant: all-small-caps;color: #205067;font-size: xx-large;}
+
+
