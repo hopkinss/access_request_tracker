@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Access Request Tracker Django Project &mdash; Django App 1.0 documentation</title>
+  <title>Views Module &mdash; Django App 1.0 documentation</title>
   
 
   
@@ -46,7 +46,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> Django App
+            <a href="index.html" class="icon icon-home"> Django App
           
 
           
@@ -78,15 +78,8 @@
             
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Access Request Tracker Django Project</a><ul>
-<li><a class="reference internal" href="#contents">Contents</a></li>
-<li><a class="reference internal" href="#module-trackapp.views">Views Module</a></li>
+<li><a class="reference internal" href="#">Views Module</a></li>
 <li><a class="reference internal" href="#module-trackapp.models">Models Module</a></li>
-<li><a class="reference internal" href="#model-diagram">Model Diagram</a></li>
-<li><a class="reference internal" href="#configure-sphinx-to-work-with-django">Configure Sphinx to Work with Django</a></li>
-<li><a class="reference internal" href="#serve-a-website-in-nginx">Serve a website in NGINX</a></li>
-</ul>
-</li>
 </ul>
 </div>
             
@@ -101,7 +94,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">Django App</a>
+          <a href="index.html">Django App</a>
         
       </nav>
 
@@ -130,15 +123,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Access Request Tracker Django Project</li>
+      <li>Views Module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/content.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -151,23 +144,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="access-request-tracker-django-project">
-<h1>Access Request Tracker Django Project<a class="headerlink" href="#access-request-tracker-django-project" title="Permalink to this headline">¶</a></h1>
-<p>Python Django web application hosted in Microsoft Azure.</p>
-<div class="section" id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><ul class="simple">
-<li><a class="reference internal" href="#views"><span class="std std-ref">Views Module</span></a></li>
-<li><a class="reference internal" href="#model"><span class="std std-ref">Models Module</span></a></li>
-<li><a class="reference internal" href="#diagram"><span class="std std-ref">Model Diagram</span></a></li>
-<li><a class="reference internal" href="#sphinx"><span class="std std-ref">Configure Sphinx to Work with Django</span></a></li>
-<li><a class="reference internal" href="#host"><span class="std std-ref">Serve a website in NGINX</span></a></li>
-</ul>
-</div></blockquote>
-</div>
-<div class="section" id="module-trackapp.views">
-<span id="views-module"></span><span id="views"></span><h2>Views Module<a class="headerlink" href="#module-trackapp.views" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="module-trackapp.views">
+<span id="views-module"></span><h1>Views Module<a class="headerlink" href="#module-trackapp.views" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="trackapp.views.AddUserView">
 <em class="property">class </em><code class="descclassname">trackapp.views.</code><code class="descname">AddUserView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#AddUserView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.AddUserView" title="Permalink to this definition">¶</a></dt>
@@ -338,7 +316,7 @@
 
 </div>
 <div class="section" id="module-trackapp.models">
-<span id="models-module"></span><span id="model"></span><h2>Models Module<a class="headerlink" href="#module-trackapp.models" title="Permalink to this headline">¶</a></h2>
+<span id="models-module"></span><h1>Models Module<a class="headerlink" href="#module-trackapp.models" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="trackapp.models.CS096">
 <em class="property">class </em><code class="descclassname">trackapp.models.</code><code class="descname">CS096</code><span class="sig-paren">(</span><em>id</em>, <em>project</em>, <em>protocol</em>, <em>request_date</em>, <em>requestor</em>, <em>approver</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/models.html#CS096"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.models.CS096" title="Permalink to this definition">¶</a></dt>
@@ -432,54 +410,6 @@
 <dd><p>An enumeration.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="model-diagram">
-<span id="diagram"></span><h2>Model Diagram<a class="headerlink" href="#model-diagram" title="Permalink to this headline">¶</a></h2>
-<p>PyCharm model visualization. (ctrl-alt-u)</p>
-<blockquote>
-<div><img alt="_images/model.png" src="_images/model.png" />
-</div></blockquote>
-</div>
-<div class="section" id="configure-sphinx-to-work-with-django">
-<span id="sphinx"></span><h2>Configure Sphinx to Work with Django<a class="headerlink" href="#configure-sphinx-to-work-with-django" title="Permalink to this headline">¶</a></h2>
-<p>Add the following code to conf.py…</p>
-<blockquote>
-<div><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;path to Django App&gt;&#39;</span><span class="p">))</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;Django app name&gt;.settings&#39;</span>
-<span class="kn">import</span> <span class="nn">django</span>
-<span class="n">django</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>Add the autodoc elements to the restructued text file…</p>
-<blockquote>
-<div><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">automodule</span><span class="p">::</span> <span class="n">trackapp</span><span class="o">.</span><span class="n">views</span>
-    <span class="p">:</span><span class="n">members</span><span class="p">:</span>
-    <span class="p">:</span><span class="n">private</span><span class="o">-</span><span class="n">members</span><span class="p">:</span>
-</pre></div>
-</div>
-</div></blockquote>
-</div>
-<div class="section" id="serve-a-website-in-nginx">
-<span id="host"></span><h2>Serve a website in NGINX<a class="headerlink" href="#serve-a-website-in-nginx" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p class="first">Create a folder under //etc//www//html</p>
-</li>
-<li><p class="first">Add the path to //etc/nginx/sites-available/default</p>
-<blockquote>
-<div><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">location</span> <span class="o">/</span><span class="n">docs</span><span class="o">/</span> <span class="p">{</span>
-    <span class="n">root</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="p">;</span>
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-<li><p class="first">Restart NGINX</p>
-</li>
-</ol>
-</div>
 </div>
 
 

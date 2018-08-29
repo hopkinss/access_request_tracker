@@ -16,12 +16,17 @@
   <div class="container-fluid" >
     <div class="carousel" style="margin: 0px;background-color:#0f0f0f;">
         <h1 style="font-variant: small-caps;color:#e38d13;">&nbsp;&nbsp;</i>SAS Security Request Tracker</h1>
-{#        <div style="float:right;color:#e38d13;margin-right: 15px;">#}
-{#        </div><br/>#}
+        <div style="display:inline-block;float:right;color:#e38d13;margin-right: 15px;">
+             <a href="http://py230-ubuntu0223.westus.cloudapp.azure.com/docs/">
+                <i  class="fab fa-python fa-3x"></i>
+             </a>
+        </div>
 
-        <nav class="navbar-collapse" style="padding-left: 20px;">
+        <nav class="navbar-collapse" style="padding-left: 20px;padding-bottom: 20px;">
         <a title="All request" class="navbar-brand" href="{%  url 'entry_list' %}"><i class="fa fa-list my-icon">&nbsp;&nbsp;All requests</i></a>
         <a title="Add a request" class="navbar-brand"    href="{%  url 'entry_add' %}"><i class="fa fa-plus-circle my-icon">&nbsp;&nbsp;New request</i></a>
+
+
         </nav>
     </div>
   </div>
@@ -35,9 +40,6 @@
     </div>
   <footer style="margin-top:100px;border-top:1px solid #8d8d8d;background-color:#e8e8e8 ;" >
     <div class= "navbar navbar-inverse navbar-static-bottom text-muted" role="navigation">
-{#    <div class="navbar-text pull-left">#}
-{#    </div>#}
-        <!--Below is the copyright information for the site. You can fill in your own here.-->
         <div class="container text-center">
             <div class="text-muted">
                 <a href="https://github.com/hopkinss/access_request_tracker">

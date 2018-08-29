@@ -1,12 +1,27 @@
 
 Access Request Tracker Django Project
 ==========================================
+Python Django web application hosted in Microsoft Azure. 
+
+Contents
+----------------------
+    * :ref:`views`
+    * :ref:`model`
+    * :ref:`diagram`
+    * :ref:`sphinx`
+    * :ref:`host`
+
+ 
+.. _views:
 
 Views Module
-------------------------
+-------------------------
+
 .. automodule:: trackapp.views
     :members:
     :private-members:
+
+.. _model:
 
 Models Module
 ---------------------
@@ -14,6 +29,48 @@ Models Module
     :members: 
 
     
-    
+.. _diagram:
 
+Model Diagram
+---------------------
+PyCharm model visualization. (ctrl-alt-u)
 
+    .. image:: _static\\model.png   
+
+.. _sphinx:
+
+Configure Sphinx to Work with Django
+------------------------------------------
+Add the following code to conf.py...
+
+    .. code-block:: Python
+
+        import os
+        import sys
+        sys.path.insert(0, os.path.abspath(r'<path to Django App>'))
+        import os
+        os.environ['DJANGO_SETTINGS_MODULE'] = '<Django app name>.settings'
+        import django
+        django.setup()
+
+Add the autodoc elements to the restructued text file...
+
+    .. code-block:: Python
+
+        .. automodule:: trackapp.views
+            :members:
+            :private-members:
+
+.. _host:
+
+Serve a website in NGINX 
+------------------------------------------  
+#. Create a folder under //etc//www//html
+#. Add the path to //etc/nginx/sites-available/default
+
+    .. code-block:: Python
+
+        location /docs/ {
+            root /var/www/html/;
+            
+#. Restart NGINX            
