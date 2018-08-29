@@ -1,12 +1,19 @@
 
-Mailer.py Application
--------------------------
+Access Request Tracker Django Project
+==========================================
 
+Views Module
+------------------------
 .. automodule:: trackapp.views
     :members:
     :private-members:
 
-.. autoclass:: trackapp.models
-    :members:
-    :special-members:
+Models Module
+---------------------
+.. automodule:: trackapp.models
+    :members: 
+
+    
+    
+
 
