@@ -1,0 +1,249 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>trackapp.views &#8212; Django App 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for trackapp.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="k">import</span> <span class="n">render</span><span class="p">,</span><span class="n">redirect</span><span class="p">,</span><span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">trackapp.models</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">django</span> <span class="k">import</span>  <span class="n">http</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.edit</span> <span class="k">import</span> <span class="n">FormView</span><span class="p">,</span><span class="n">View</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="k">import</span> <span class="n">viewsets</span>
+<span class="kn">from</span> <span class="nn">.serializers</span> <span class="k">import</span> <span class="n">ProductSerializer</span><span class="p">,</span><span class="n">ProtocolSerializer</span>
+<span class="kn">from</span> <span class="nn">trackapp.forms</span> <span class="k">import</span> <span class="n">CS096Form</span><span class="p">,</span><span class="n">UserAddForm</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="k">import</span> <span class="n">ListView</span><span class="p">,</span> <span class="n">CreateView</span><span class="p">,</span> <span class="n">UpdateView</span><span class="p">,</span><span class="n">DetailView</span><span class="p">,</span><span class="n">DeleteView</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="k">import</span> <span class="n">reverse_lazy</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">Protocol</span><span class="p">,</span><span class="n">Product</span><span class="p">,</span><span class="n">CS096</span>
+
+
+<div class="viewcode-block" id="CS096ListView"><a class="viewcode-back" href="../../index.html#trackapp.views.CS096ListView">[docs]</a><span class="k">class</span> <span class="nc">CS096ListView</span><span class="p">(</span><span class="n">ListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; List view for parent table CS096&quot;&quot;&quot;</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">CS096</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;list.html&#39;</span>
+    <span class="n">queryset</span><span class="o">=</span><span class="n">CS096</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;project&#39;</span><span class="p">)</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;entries&#39;</span></div>
+
+<div class="viewcode-block" id="CS096CreateView"><a class="viewcode-back" href="../../index.html#trackapp.views.CS096CreateView">[docs]</a><span class="k">class</span> <span class="nc">CS096CreateView</span><span class="p">(</span><span class="n">CreateView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Model form to handle Create for CS096 &quot;&quot;&quot;</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">CS096</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">CS096</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">CS096Form</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;index.html&#39;</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;entry_list&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CS096CreateView.form_invalid"><a class="viewcode-back" href="../../index.html#trackapp.views.CS096CreateView.form_invalid">[docs]</a>    <span class="k">def</span> <span class="nf">form_invalid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="n">HttpResponse</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="AddUserView"><a class="viewcode-back" href="../../index.html#trackapp.views.AddUserView">[docs]</a><span class="k">class</span> <span class="nc">AddUserView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; View to manage Create for child table UserAccess &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AddUserView.get"><a class="viewcode-back" href="../../index.html#trackapp.views.AddUserView.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">pk</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle GET request returns empty UserAccess form with reference to parent CS096 object</span>
+<span class="sd">        :param request:</span>
+<span class="sd">        :param pk: Foreign key for CS096</span>
+<span class="sd">        :return: UserAccess form</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">req</span><span class="o">=</span><span class="n">CS096</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+        <span class="n">form</span><span class="o">=</span><span class="n">UserAddForm</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;adduser.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">,</span><span class="s1">&#39;cs096_&#39;</span><span class="p">:</span><span class="n">req</span><span class="p">})</span></div>
+
+<div class="viewcode-block" id="AddUserView.post"><a class="viewcode-back" href="../../index.html#trackapp.views.AddUserView.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">pk</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle POST request - creates new UserAccess record related to CS096 by PK</span>
+<span class="sd">        :param request:</span>
+<span class="sd">        :param pk: FK to CS096</span>
+<span class="sd">        :return: redirect to list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form</span><span class="o">=</span><span class="n">UserAddForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+
+            <span class="n">entity</span><span class="o">=</span><span class="n">CS096</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+            <span class="n">entity</span><span class="o">.</span><span class="n">useraccesses</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">),</span><span class="n">action</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action&quot;</span><span class="p">),</span><span class="n">group</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="CS096UpdateView"><a class="viewcode-back" href="../../index.html#trackapp.views.CS096UpdateView">[docs]</a><span class="k">class</span> <span class="nc">CS096UpdateView</span><span class="p">(</span><span class="n">UpdateView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Model view updates CS096 records &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">CS096</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;details.html&#39;</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">CS096Form</span>
+    <span class="n">queryset</span> <span class="o">=</span>  <span class="n">CS096</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;entry_list&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CS096UpdateUserView"><a class="viewcode-back" href="../../index.html#trackapp.views.CS096UpdateUserView">[docs]</a><span class="k">class</span> <span class="nc">CS096UpdateUserView</span><span class="p">(</span><span class="n">UpdateView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Model view updates UserAccess record &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">UserAccess</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;user_details.html&#39;</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">UserAddForm</span>
+    <span class="n">queryset</span> <span class="o">=</span>  <span class="n">UserAccess</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;entry_list&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="load_protocols"><a class="viewcode-back" href="../../index.html#trackapp.views.load_protocols">[docs]</a><span class="k">def</span> <span class="nf">load_protocols</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Insert child protocol for selected product into cascading select elements&quot;&quot;&quot;</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;protocols&#39;</span><span class="p">)</span>
+    <span class="n">protocols</span><span class="o">=</span><span class="n">Protocol</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">product_id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dropdown.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;protocols&#39;</span><span class="p">:</span> <span class="n">protocols</span><span class="p">})</span></div>
+
+<div class="viewcode-block" id="CS096DeleteView"><a class="viewcode-back" href="../../index.html#trackapp.views.CS096DeleteView">[docs]</a><span class="k">class</span> <span class="nc">CS096DeleteView</span><span class="p">(</span><span class="n">DeleteView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Handle POST to delete a CS096 record&quot;&quot;&quot;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;delete.html&#39;</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">CS096Form</span>
+    <span class="n">queryset</span> <span class="o">=</span>  <span class="n">CS096</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;entry_list&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CS096DeleteView.get"><a class="viewcode-back" href="../../index.html#trackapp.views.CS096DeleteView.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete a CS096 record</span>
+<span class="sd">        :param a: WSGI GET request for CS096 record</span>
+<span class="sd">        :param kw: PK - primary key for CS096 record</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="CS096DeleteUserView"><a class="viewcode-back" href="../../index.html#trackapp.views.CS096DeleteUserView">[docs]</a><span class="k">class</span> <span class="nc">CS096DeleteUserView</span><span class="p">(</span><span class="n">DeleteView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Delete a single user from UserAccess&quot;&quot;&quot;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;delete_user.html&#39;</span>
+    <span class="n">queryset</span> <span class="o">=</span>  <span class="n">UserAccess</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;entry_list&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CS096DeleteUserView.get"><a class="viewcode-back" href="../../index.html#trackapp.views.CS096DeleteUserView.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete a UserAcess record</span>
+<span class="sd">        :param a: WSGI GET request for UserAccess record</span>
+<span class="sd">        :param kw: PK - primary key for UserAccess record</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ProductViewSet"><a class="viewcode-back" href="../../index.html#trackapp.views.ProductViewSet">[docs]</a><span class="k">class</span> <span class="nc">ProductViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Endpoint that returns all Products</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">ProductSerializer</span></div>
+
+<div class="viewcode-block" id="ProtocolViewSet"><a class="viewcode-back" href="../../index.html#trackapp.views.ProtocolViewSet">[docs]</a><span class="k">class</span> <span class="nc">ProtocolViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Enpoint that returns protocols by product</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Protocol</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">ProtocolSerializer</span></div>
+
+
+
+
+
+
+
+
+
+    <span class="c1"># def main_view(request):</span>
+    <span class="c1">#     if request.method==&quot;POST&quot;:</span>
+    <span class="c1">#         form=CS096Form(request.POST)</span>
+    <span class="c1">#         if form.is_valid():</span>
+    <span class="c1">#             model_instance=form.save(commit=False)</span>
+    <span class="c1">#             model_instance.timestamp= timezone.now()</span>
+    <span class="c1">#             model_instance.save()</span>
+    <span class="c1">#             return redirect(&#39;/&#39;)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         form=CS096Form()</span>
+    <span class="c1">#         return render(request,&#39;index.html&#39;,{&#39;form&#39;:form})</span>
+    <span class="c1"># class CS096CreateUserView(CreateView):</span>
+    <span class="c1">#     model = UserAccess</span>
+    <span class="c1">#</span>
+    <span class="c1">#     form_class = UserAddForm</span>
+    <span class="c1">#     template_name = &#39;adduser.html&#39;</span>
+    <span class="c1">#     success_url = reverse_lazy(&#39;entry_list&#39;)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     def form_invalid(self, form):</span>
+    <span class="c1">#         return http.HttpResponse(form.fields)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Django App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, shawn.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.8</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

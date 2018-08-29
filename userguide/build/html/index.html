@@ -1,0 +1,269 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Mailer.py Application &#8212; Django App 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-trackapp.views">
+<span id="mailer-py-application"></span><h1>Mailer.py Application<a class="headerlink" href="#module-trackapp.views" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="trackapp.views.AddUserView">
+<em class="property">class </em><code class="descclassname">trackapp.views.</code><code class="descname">AddUserView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#AddUserView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.AddUserView" title="Permalink to this definition">¶</a></dt>
+<dd><p>View to manage Create for child table UserAccess</p>
+<dl class="method">
+<dt id="trackapp.views.AddUserView.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>request</em>, <em>pk</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#AddUserView.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.AddUserView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle GET request returns empty UserAccess form with reference to parent CS096 object
+:param request:
+:param pk: Foreign key for CS096
+:return: UserAccess form</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trackapp.views.AddUserView.post">
+<code class="descname">post</code><span class="sig-paren">(</span><em>request</em>, <em>pk</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#AddUserView.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.AddUserView.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle POST request - creates new UserAccess record related to CS096 by PK
+:param request:
+:param pk: FK to CS096
+:return: redirect to list</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trackapp.views.CS096CreateView">
+<em class="property">class </em><code class="descclassname">trackapp.views.</code><code class="descname">CS096CreateView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#CS096CreateView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.CS096CreateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model form to handle Create for CS096</p>
+<dl class="attribute">
+<dt id="trackapp.views.CS096CreateView.form_class">
+<code class="descname">form_class</code><a class="headerlink" href="#trackapp.views.CS096CreateView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.forms.CS096Form</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trackapp.views.CS096CreateView.form_invalid">
+<code class="descname">form_invalid</code><span class="sig-paren">(</span><em>form</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#CS096CreateView.form_invalid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.CS096CreateView.form_invalid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is invalid, render the invalid form.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="trackapp.views.CS096CreateView.model">
+<code class="descname">model</code><a class="headerlink" href="#trackapp.views.CS096CreateView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.models.CS096</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trackapp.views.CS096DeleteUserView">
+<em class="property">class </em><code class="descclassname">trackapp.views.</code><code class="descname">CS096DeleteUserView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#CS096DeleteUserView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.CS096DeleteUserView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a single user from UserAccess</p>
+<dl class="method">
+<dt id="trackapp.views.CS096DeleteUserView.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>*a</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#CS096DeleteUserView.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.CS096DeleteUserView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a UserAcess record
+:param a: WSGI GET request for UserAccess record
+:param kw: PK - primary key for UserAccess record
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trackapp.views.CS096DeleteView">
+<em class="property">class </em><code class="descclassname">trackapp.views.</code><code class="descname">CS096DeleteView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#CS096DeleteView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.CS096DeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle POST to delete a CS096 record</p>
+<dl class="attribute">
+<dt id="trackapp.views.CS096DeleteView.form_class">
+<code class="descname">form_class</code><a class="headerlink" href="#trackapp.views.CS096DeleteView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.forms.CS096Form</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trackapp.views.CS096DeleteView.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>*a</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#CS096DeleteView.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.CS096DeleteView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a CS096 record
+:param a: WSGI GET request for CS096 record
+:param kw: PK - primary key for CS096 record
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trackapp.views.CS096ListView">
+<em class="property">class </em><code class="descclassname">trackapp.views.</code><code class="descname">CS096ListView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#CS096ListView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.CS096ListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>List view for parent table CS096</p>
+<dl class="attribute">
+<dt id="trackapp.views.CS096ListView.model">
+<code class="descname">model</code><a class="headerlink" href="#trackapp.views.CS096ListView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.models.CS096</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trackapp.views.CS096UpdateUserView">
+<em class="property">class </em><code class="descclassname">trackapp.views.</code><code class="descname">CS096UpdateUserView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#CS096UpdateUserView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.CS096UpdateUserView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model view updates UserAccess record</p>
+<dl class="attribute">
+<dt id="trackapp.views.CS096UpdateUserView.form_class">
+<code class="descname">form_class</code><a class="headerlink" href="#trackapp.views.CS096UpdateUserView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.forms.UserAddForm</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="trackapp.views.CS096UpdateUserView.model">
+<code class="descname">model</code><a class="headerlink" href="#trackapp.views.CS096UpdateUserView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.models.UserAccess</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trackapp.views.CS096UpdateView">
+<em class="property">class </em><code class="descclassname">trackapp.views.</code><code class="descname">CS096UpdateView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#CS096UpdateView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.CS096UpdateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model view updates CS096 records</p>
+<dl class="attribute">
+<dt id="trackapp.views.CS096UpdateView.form_class">
+<code class="descname">form_class</code><a class="headerlink" href="#trackapp.views.CS096UpdateView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.forms.CS096Form</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="trackapp.views.CS096UpdateView.model">
+<code class="descname">model</code><a class="headerlink" href="#trackapp.views.CS096UpdateView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.models.CS096</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trackapp.views.ProductViewSet">
+<em class="property">class </em><code class="descclassname">trackapp.views.</code><code class="descname">ProductViewSet</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#ProductViewSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.ProductViewSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Endpoint that returns all Products</p>
+<dl class="attribute">
+<dt id="trackapp.views.ProductViewSet.serializer_class">
+<code class="descname">serializer_class</code><a class="headerlink" href="#trackapp.views.ProductViewSet.serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.serializers.ProductSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trackapp.views.ProtocolViewSet">
+<em class="property">class </em><code class="descclassname">trackapp.views.</code><code class="descname">ProtocolViewSet</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#ProtocolViewSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.ProtocolViewSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enpoint that returns protocols by product</p>
+<dl class="attribute">
+<dt id="trackapp.views.ProtocolViewSet.queryset">
+<code class="descname">queryset</code><a class="headerlink" href="#trackapp.views.ProtocolViewSet.queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.models.Protocol</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="trackapp.views.ProtocolViewSet.serializer_class">
+<code class="descname">serializer_class</code><a class="headerlink" href="#trackapp.views.ProtocolViewSet.serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.serializers.ProtocolSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="trackapp.views.load_protocols">
+<code class="descclassname">trackapp.views.</code><code class="descname">load_protocols</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trackapp/views.html#load_protocols"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trackapp.views.load_protocols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert child protocol for selected product into cascading select elements</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="trackapp.models">
+<code class="descclassname">trackapp.</code><code class="descname">models</code><a class="headerlink" href="#trackapp.models" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#trackapp.models" title="trackapp.models"><code class="xref py py-class docutils literal notranslate"><span class="pre">trackapp.models</span></code></a></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Django App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, shawn.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.8</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

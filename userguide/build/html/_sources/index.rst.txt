@@ -1,0 +1,12 @@
+
+Mailer.py Application
+-------------------------
+
+.. automodule:: trackapp.views
+    :members:
+    :private-members:
+
+.. autoclass:: trackapp.models
+    :members:
+    :special-members:
+
