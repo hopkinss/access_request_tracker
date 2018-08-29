@@ -4,13 +4,18 @@
   {% comment %} here is where the query happens {% endcomment %}
  <h4>SAS Server Access Requests</h4>
 
-
 {#{% render_table entries %}#}
-            <table width="50%">
+            <table style="background-color: aliceblue;" border="1" width="50%">
             <tr><th>Protocol</th><th>Product</th><th>Requestor</th><th>Approver</th><th>Date executed</th><th></th></tr>
                 {% for e in entries %}
                     <tr>
-                        <td>{{ e.project}}</td>
+                        <td style="display:none;">{{ e.id }}</td>
+                        {% if e.useraccesses.count > 0 %}
+                            <td><a href="#" id="show_{{ e.id }}"><i class="fa fa-arrow-circle-down" style="color: #79aec8;" ></i></a>&nbsp;{{ e.project}}</td>
+                        {% else %}
+                            <td>{{ e.project}}</td>
+                        {% endif %}
+
                         <td>{{ e.protocol.protocol }}</td>
                         <td>{{ e.requestor }}</td>
                         <td>{{ e.approver }}</td>
@@ -18,14 +23,45 @@
                         <td align="right">
                             <a href="{%  url 'entry_update' e.id %}"><button><i class="fa fa-edit" style="color: #79aec8;" ></i></button></a>
                             <a href="{%  url 'entry_delete' e.id %}"><button><i class="fa fa-trash" style="color: #79aec8;" ></i></button></a>
+                            <a href="{%  url 'user_add' e.id %}"><button><i id="expander" class="fa fa-user-plus" style="color: #79aec8;" ></i></button></a></td>
                         </td>
                     </tr>
+                     <tr>
+                        <td colspan="7">
+                            <div id="extra_{{ e.id }}" style="display: none;padding-left: 20px;">
 
+                                    <table  width="100%" border="1x solid blue;">
+                                    <tr >
+                                        <th class="subhead" >User</th><th class="subhead" >Action</th><th class="subhead">Group</th><th class="subhead"></th>
+                                    </tr>
+                                    {% for r in e.useraccesses.all %}
+                                        <tr>
+                                        <td style="display:none;">{{ r.id }}</td>
+                                        <td style="display:none;">{{ e.id }}</td>
+                                        <td>{{ r.username }}</td>
+                                        <td>{{ r.action }}</td>
+                                        <td>{{ r.group }}</td>
+                                        <td align="right">
+                                            <a href="{%  url 'user_update' r.id %}"><button><i class="fa fa-edit" style="color: #79aec8;" ></i></button></a>
+                                            <a href="{%  url 'user_delete' r.id %}"><button><i class="fa fa-trash" style="color: #79aec8;" ></i></button></a>
+                                        </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </table>
 
+                            </div>
+                        </td>
+                     </tr>
 
                 {% endfor %}
             </table>
-
+            <script>
+                $("a[id^=show_]").click(function(event) {
+                 $("#extra_" + $(this).attr('id').substr(5)).slideToggle("fast")
+                $(this).find('i').toggleClass('fa-arrow-circle-down fa-arrow-circle-up')
+                 event.preventDefault();
+                });
+            </script>
 
 
 {% endblock %}

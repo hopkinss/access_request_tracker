@@ -28,7 +28,6 @@ class Protocol(models.Model):
         return self.protocol
 
 
-
 class CS096(models.Model):
     project=models.ForeignKey(Product,on_delete=models.SET_NULL,null=True)
     protocol=models.ForeignKey(Protocol,on_delete=models.SET_NULL,null=True)
@@ -57,10 +56,8 @@ class FileShare(models.Model):
 class UserAccess(models.Model):
     username=models.CharField(max_length=100)
     action=models.CharField(max_length=10,
-                            choices=[(i.value,i) for i in UserActions ])
+                            choices=(("Add","Add"),("Remove","Remove")))
     group = models.CharField(max_length=100)
-    cs096 = models.ForeignKey(CS096, on_delete=models.CASCADE)
-
-
+    cs096 = models.ForeignKey(CS096,related_name="useraccesses", on_delete=models.CASCADE)
 
 

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+    {% block content %}
+  <div >
+    <form method="post" id="trackForm" >
+        {% csrf_token %}
+            <input type="text" name="cs096_id"  style="display: none;" required id="cs096_id" value="{{ cs096_.id }}">
+            <div >
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <h5>Manage Active Directory Group Membership for: <em>{{ cs096_.protocol }}</em></h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>User name</label>
+                        </td>
+                        <td>
+                            {{ form.username}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Group</label>
+                        </td>
+                        <td>
+                            {{ form.group }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Action</label>
+                        </td>
+                        <td>
+                            {{ form.action}}
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td >
+                        </td>
+                        <td align="center" style="padding-top: 10px;">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </td>
+                        <td id="t1">
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+
+    </form>
+  </div>
+
+
+{% endblock %}

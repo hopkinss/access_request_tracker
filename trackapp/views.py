@@ -6,14 +6,14 @@ from django.shortcuts import render,redirect,reverse
 from trackapp.models import *
 from django.utils import timezone
 from django import  http
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView,View
 from django_tables2 import RequestConfig
 from .tables import CS096Table
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from .serializers import ProductSerializer,ProtocolSerializer
 
-from trackapp.forms import CS096Form
+from trackapp.forms import CS096Form,UserAddForm
 
 
 from django.views.generic import ListView, CreateView, UpdateView,DetailView,DeleteView
@@ -31,12 +31,40 @@ class CS096ListView(ListView):
 # Add a new recordd and display the list
 class CS096CreateView(CreateView):
     model = CS096
+    queryset = CS096.objects.all()
     form_class = CS096Form
     template_name = 'index.html'
     success_url = reverse_lazy('entry_list')
 
     def form_invalid(self, form):
         return http.HttpResponse(form.fields)
+
+class CS096CreateUserView(CreateView):
+    model = UserAccess
+
+    form_class = UserAddForm
+    template_name = 'adduser.html'
+    success_url = reverse_lazy('entry_list')
+
+    def form_invalid(self, form):
+        return http.HttpResponse(form.fields)
+
+class AddUserTest(View):
+
+    def get(self,request,pk):
+        req=CS096.objects.get(pk=pk)
+        form=UserAddForm()
+
+        return render(request, 'adduser.html', {'form': form,'cs096_':req})
+
+    def post(self,request,pk):
+        form=UserAddForm(request.POST)
+        if form.is_valid():
+
+            entity=CS096.objects.get(pk=pk)
+            entity.useraccesses.create(username=form.cleaned_data.get("username"),action=form.cleaned_data.get("action"),group=form.cleaned_data.get("group"))
+            return redirect('/')
+
 
 
 # Update existing record and return list
@@ -45,6 +73,13 @@ class CS096UpdateView(UpdateView):
     template_name = 'details.html'
     form_class = CS096Form
     queryset =  CS096.objects.filter()
+    success_url = reverse_lazy('entry_list')
+
+class CS096UpdateUserView(UpdateView):
+    model = UserAccess
+    template_name = 'user_details.html'
+    form_class = UserAddForm
+    queryset =  UserAccess.objects.filter()
     success_url = reverse_lazy('entry_list')
 
 # AJAX insert dependent protocols based on selected  product
@@ -63,18 +98,16 @@ class CS096DeleteView(DeleteView):
     def get(self, *a, **kw):
         return self.delete(*a, **kw)
 
-#
-# def main_view(request):
-#     if request.method=="POST":
-#         form=CS096Form(request.POST)
-#         if form.is_valid():
-#             model_instance=form.save(commit=False)
-#             model_instance.timestamp= timezone.now()
-#             model_instance.save()
-#             return redirect('/')
-#     else:
-#         form=CS096Form()
-#         return render(request,'index.html',{'form':form})
+# Delete a single user
+class CS096DeleteUserView(DeleteView):
+    template_name = 'delete_user.html'
+    queryset =  UserAccess.objects.filter()
+    success_url = reverse_lazy('entry_list')
+
+    def get(self, *a, **kw):
+        return self.delete(*a, **kw)
+
+
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -90,3 +123,15 @@ class ProtocolViewSet(viewsets.ModelViewSet):
     """
     queryset = Protocol
     serializer_class = ProtocolSerializer
+
+    # def main_view(request):
+    #     if request.method=="POST":
+    #         form=CS096Form(request.POST)
+    #         if form.is_valid():
+    #             model_instance=form.save(commit=False)
+    #             model_instance.timestamp= timezone.now()
+    #             model_instance.save()
+    #             return redirect('/')
+    #     else:
+    #         form=CS096Form()
+    #         return render(request,'index.html',{'form':form})

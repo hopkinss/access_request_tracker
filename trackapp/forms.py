@@ -12,3 +12,12 @@ class CS096Form(ModelForm):
         self.fields['requestor'].widget.attrs.update({'class': "input-class1"})
         self.fields['approver'].widget.attrs.update({'class': "input-class1"})
 
+class UserAddForm(ModelForm):
+    class Meta:
+        model=UserAccess
+        fields=['username','action','group']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'class': "input-class1"})
+        self.fields['group'].widget.attrs.update({'class': "input-class1"})

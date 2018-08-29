@@ -82,7 +82,7 @@ td,th {
 
 }
 
-tr:nth-child(even) {background: #c4dce8;}
+/*tr:nth-child(even) {background: #c4dce8;}*/
 
 tr:hover {color: #3875d7;}
 
@@ -101,4 +101,6 @@ th {
 .input-class1{width: 500px;color:#3875d7;font-size: smaller;}
 h4 {font-family: "Droid Sans";font-variant: all-small-caps;color: #205067;font-size: xx-large;}
 
+
+.subhead{background-color: #3875d7;}
 
