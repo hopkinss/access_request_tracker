@@ -47,8 +47,6 @@ Add the following code to conf.py...
 
         import os
         import sys
-        sys.path.insert(0, os.path.abspath(r'<path to Django App>'))
-        import os
         os.environ['DJANGO_SETTINGS_MODULE'] = '<Django app name>.settings'
         import django
         django.setup()
@@ -72,5 +70,5 @@ Serve a website in NGINX
 
         location /docs/ {
             root /var/www/html/;
-            
+
 #. Restart NGINX            
