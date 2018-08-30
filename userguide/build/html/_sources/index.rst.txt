@@ -1,7 +1,16 @@
 
 Access Request Tracker Django Project
 ==========================================
-Python Django web application hosted in Microsoft Azure. 
+Python Django web application hosted in Microsoft Azure. Performs CRUD operations on parent **CS096 table** and 
+child **UserAccess** tables. 
+
+Key learning points
+-----------------------
+    #. Use AJAX to dynamically populate cascading selects on the change event of the parent select
+    #. Use fixture to seed database *manage.py* loaddata <fixture name>
+    #. Use class-based views to manage database transactions
+    #. Add automated documentation using Sphinx and configure NGINX to serve the HTML
+
 
 Contents
 ----------------------
@@ -63,8 +72,8 @@ Add the autodoc elements to the restructued text file...
 
 Serve a website in NGINX 
 ------------------------------------------  
-#. Create a folder under //etc//www//html
-#. Add the path to //etc/nginx/sites-available/default
+#. Create a folder under /etc/www//html
+#. Add the path to /etc/nginx/sites-available/default
 
     .. code-block:: Python
 

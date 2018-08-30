@@ -79,6 +79,7 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">Access Request Tracker Django Project</a><ul>
+<li><a class="reference internal" href="#key-learning-points">Key learning points</a></li>
 <li><a class="reference internal" href="#contents">Contents</a></li>
 <li><a class="reference internal" href="#module-trackapp.views">Views Module</a></li>
 <li><a class="reference internal" href="#module-trackapp.models">Models Module</a></li>
@@ -153,7 +154,19 @@
             
   <div class="section" id="access-request-tracker-django-project">
 <h1>Access Request Tracker Django Project<a class="headerlink" href="#access-request-tracker-django-project" title="Permalink to this headline">¶</a></h1>
-<p>Python Django web application hosted in Microsoft Azure.</p>
+<p>Python Django web application hosted in Microsoft Azure. Performs CRUD operations on parent <strong>CS096 table</strong> and
+child <strong>UserAccess</strong> tables.</p>
+<div class="section" id="key-learning-points">
+<h2>Key learning points<a class="headerlink" href="#key-learning-points" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Use AJAX to dynamically populate cascading selects on the change event of the parent select</li>
+<li>Use fixture to seed database <em>manage.py</em> loaddata &lt;fixture name&gt;</li>
+<li>Use class-based views to manage database transactions</li>
+<li>Add automated documentation using Sphinx and configure NGINX to serve the HTML</li>
+</ol>
+</div></blockquote>
+</div>
 <div class="section" id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <blockquote>
@@ -464,9 +477,9 @@
 <div class="section" id="serve-a-website-in-nginx">
 <span id="host"></span><h2>Serve a website in NGINX<a class="headerlink" href="#serve-a-website-in-nginx" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Create a folder under //etc//www//html</p>
+<li><p class="first">Create a folder under /etc/www//html</p>
 </li>
-<li><p class="first">Add the path to //etc/nginx/sites-available/default</p>
+<li><p class="first">Add the path to /etc/nginx/sites-available/default</p>
 <blockquote>
 <div><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">location</span> <span class="o">/</span><span class="n">docs</span><span class="o">/</span> <span class="p">{</span>
     <span class="n">root</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="p">;</span>
