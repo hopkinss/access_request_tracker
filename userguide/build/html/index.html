@@ -86,6 +86,7 @@
 <li><a class="reference internal" href="#model-diagram">Model Diagram</a></li>
 <li><a class="reference internal" href="#configure-sphinx-to-work-with-django">Configure Sphinx to Work with Django</a></li>
 <li><a class="reference internal" href="#serve-a-website-in-nginx">Serve a website in NGINX</a></li>
+<li><a class="reference internal" href="#api">Serve a website in NGINX</a></li>
 </ul>
 </li>
 </ul>
@@ -159,54 +160,12 @@ child <strong>UserAccess</strong> tables.</p>
 <div class="section" id="key-learning-points">
 <h2>Key learning points<a class="headerlink" href="#key-learning-points" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><ol class="arabic">
-<li><p class="first">Use AJAX to dynamically populate cascading selects on the change event of the parent select</p>
-</li>
-<li><p class="first">Use fixture to seed database <em>manage.py</em> loaddata &lt;fixture name&gt;</p>
-</li>
-<li><p class="first">Use class-based views to manage database transactions</p>
-</li>
-<li><p class="first">Add automated documentation using Sphinx and configure NGINX to serve the HTML</p>
-</li>
-<li><p class="first">Add a REST api with minimal effort</p>
-<blockquote>
-<div><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="n">url</span><span class="o">.</span><span class="n">py</span><span class="o">**</span>
-<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">routers</span>
-<span class="n">router</span> <span class="o">=</span> <span class="n">routers</span><span class="o">.</span><span class="n">DefaultRouter</span><span class="p">()</span>
-<span class="n">router</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;product&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">ProductViewSet</span><span class="p">)</span>
-<span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^api-auth/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;rest_framework.urls&#39;</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;rest_framework&#39;</span><span class="p">)),</span>\
-
-<span class="o">**</span><span class="n">views</span><span class="o">.</span><span class="n">py</span><span class="o">**</span>
-<span class="k">class</span> <span class="nc">ProductViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
-    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">ProductSerializer</span>
-
-<span class="k">class</span> <span class="nc">ProtocolViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
-    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Protocol</span>
-    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">ProtocolSerializer</span>
-
-<span class="o">**</span><span class="n">serializer</span><span class="o">.</span><span class="n">py</span><span class="o">**</span>
-<span class="k">class</span> <span class="nc">ProtocolSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">model</span> <span class="o">=</span><span class="n">Protocol</span>
-        <span class="n">fields</span><span class="o">=</span><span class="s1">&#39;__all__&#39;</span>
-
-
-<span class="k">class</span> <span class="nc">ProductSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
-    <span class="n">protocols</span><span class="o">=</span><span class="n">ProtocolSerializer</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">model</span> <span class="o">=</span><span class="n">Product</span>
-        <span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;product&#39;</span><span class="p">,</span><span class="s1">&#39;protocols&#39;</span><span class="p">)</span>
-
-
-
-
-<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">py230</span><span class="o">-</span><span class="n">ubuntu0223</span><span class="o">.</span><span class="n">westus</span><span class="o">.</span><span class="n">cloudapp</span><span class="o">.</span><span class="n">azure</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">product</span>
-</pre></div>
-</div>
-</div></blockquote>
-</li>
+<div><ol class="arabic simple">
+<li>Use AJAX to dynamically populate cascading selects on the change event of the parent select</li>
+<li>Use fixture to seed database <em>manage.py</em> loaddata &lt;fixture name&gt;</li>
+<li>Use class-based views to manage database transactions</li>
+<li>Add automated documentation using Sphinx and configure NGINX to serve the HTML</li>
+<li>Add a REST api with minimal effort</li>
 </ol>
 </div></blockquote>
 </div>
@@ -219,6 +178,7 @@ child <strong>UserAccess</strong> tables.</p>
 <li><a class="reference internal" href="#diagram"><span class="std std-ref">Model Diagram</span></a></li>
 <li><a class="reference internal" href="#sphinx"><span class="std std-ref">Configure Sphinx to Work with Django</span></a></li>
 <li><a class="reference internal" href="#host"><span class="std std-ref">Serve a website in NGINX</span></a></li>
+<li><a class="reference internal" href="#api"><span class="std std-ref">Serve a website in NGINX</span></a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -519,7 +479,8 @@ child <strong>UserAccess</strong> tables.</p>
 </div>
 <div class="section" id="serve-a-website-in-nginx">
 <span id="host"></span><h2>Serve a website in NGINX<a class="headerlink" href="#serve-a-website-in-nginx" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
+<blockquote>
+<div><ol class="arabic">
 <li><p class="first">Create a folder under /etc/www//html</p>
 </li>
 <li><p class="first">Add the path to /etc/nginx/sites-available/default</p>
@@ -533,6 +494,46 @@ child <strong>UserAccess</strong> tables.</p>
 <li><p class="first">Restart NGINX</p>
 </li>
 </ol>
+</div></blockquote>
+</div>
+<div class="section" id="api">
+<span id="id1"></span><h2>Serve a website in NGINX<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="n">url</span><span class="o">.</span><span class="n">py</span><span class="o">**</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">routers</span>
+<span class="n">router</span> <span class="o">=</span> <span class="n">routers</span><span class="o">.</span><span class="n">DefaultRouter</span><span class="p">()</span>
+<span class="n">router</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;product&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">ProductViewSet</span><span class="p">)</span>
+<span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^api-auth/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;rest_framework.urls&#39;</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;rest_framework&#39;</span><span class="p">)),</span>\
+
+<span class="o">**</span><span class="n">views</span><span class="o">.</span><span class="n">py</span><span class="o">**</span>
+<span class="k">class</span> <span class="nc">ProductViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">ProductSerializer</span>
+
+<span class="k">class</span> <span class="nc">ProtocolViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Protocol</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">ProtocolSerializer</span>
+
+<span class="o">**</span><span class="n">serializer</span><span class="o">.</span><span class="n">py</span><span class="o">**</span>
+<span class="k">class</span> <span class="nc">ProtocolSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span><span class="n">Protocol</span>
+        <span class="n">fields</span><span class="o">=</span><span class="s1">&#39;__all__&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">ProductSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="n">protocols</span><span class="o">=</span><span class="n">ProtocolSerializer</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span><span class="n">Product</span>
+        <span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;product&#39;</span><span class="p">,</span><span class="s1">&#39;protocols&#39;</span><span class="p">)</span>
+
+
+
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">py230</span><span class="o">-</span><span class="n">ubuntu0223</span><span class="o">.</span><span class="n">westus</span><span class="o">.</span><span class="n">cloudapp</span><span class="o">.</span><span class="n">azure</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">product</span>
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 </div>
 

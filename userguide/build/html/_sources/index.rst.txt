@@ -12,42 +12,6 @@ Key learning points
     #. Add automated documentation using Sphinx and configure NGINX to serve the HTML
     #. Add a REST api with minimal effort
 
-        .. code-block:: Python
-        
-            **url.py**
-            from rest_framework import routers
-            router = routers.DefaultRouter()
-            router.register(r'product', views.ProductViewSet)
-            url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),\
-
-            **views.py**
-            class ProductViewSet(viewsets.ModelViewSet):
-                queryset = Product.objects.all()
-                serializer_class = ProductSerializer
-
-            class ProtocolViewSet(viewsets.ModelViewSet):
-                queryset = Protocol
-                serializer_class = ProtocolSerializer
-
-            **serializer.py**
-            class ProtocolSerializer(serializers.ModelSerializer):
-                class Meta:
-                    model =Protocol
-                    fields='__all__'
-
-
-            class ProductSerializer(serializers.ModelSerializer):
-                protocols=ProtocolSerializer(many=True)
-
-                class Meta:
-                    model =Product
-                    fields=('id','product','protocols')
-
-
-
-
-            http://py230-ubuntu0223.westus.cloudapp.azure.com/product
-
 
 Contents
 ----------------------
@@ -56,10 +20,9 @@ Contents
     * :ref:`diagram`
     * :ref:`sphinx`
     * :ref:`host`
+    * :ref:`api`
 
  
-
-
 .. _views:
 
 Views Module
@@ -112,12 +75,52 @@ Add the autodoc elements to the restructued text file...
 
 Serve a website in NGINX 
 ------------------------------------------  
-#. Create a folder under /etc/www//html
-#. Add the path to /etc/nginx/sites-available/default
 
-    .. code-block:: Python
+    #. Create a folder under /etc/www//html
+    #. Add the path to /etc/nginx/sites-available/default
 
-        location /docs/ {
-            root /var/www/html/;
+        .. code-block:: Python
 
-#. Restart NGINX            
+            location /docs/ {
+                root /var/www/html/;
+
+    #. Restart NGINX            
+
+.. _api:
+
+Serve a website in NGINX 
+------------------------------------------  
+        .. code-block:: Python
+
+            **url.py**
+            from rest_framework import routers
+            router = routers.DefaultRouter()
+            router.register(r'product', views.ProductViewSet)
+            url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),\
+
+            **views.py**
+            class ProductViewSet(viewsets.ModelViewSet):
+                queryset = Product.objects.all()
+                serializer_class = ProductSerializer
+
+            class ProtocolViewSet(viewsets.ModelViewSet):
+                queryset = Protocol
+                serializer_class = ProtocolSerializer
+
+            **serializer.py**
+            class ProtocolSerializer(serializers.ModelSerializer):
+                class Meta:
+                    model =Protocol
+                    fields='__all__'
+
+
+            class ProductSerializer(serializers.ModelSerializer):
+                protocols=ProtocolSerializer(many=True)
+
+                class Meta:
+                    model =Product
+                    fields=('id','product','protocols')
+
+
+
+            http://py230-ubuntu0223.westus.cloudapp.azure.com/product
