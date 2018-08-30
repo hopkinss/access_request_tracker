@@ -21,10 +21,14 @@ Contents
     * :ref:`host`
 
  
+ The documetation below was generated automatically from the docstring and metadata about the objects
+ ----------------------------------------------------------------------------------------------------------
+ 
 .. _views:
 
 Views Module
 -------------------------
+
 
 .. automodule:: trackapp.views
     :members:
