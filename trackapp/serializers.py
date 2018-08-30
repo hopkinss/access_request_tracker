@@ -10,7 +10,6 @@ class ProtocolSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-
     protocols=ProtocolSerializer(many=True)
 
     class Meta:

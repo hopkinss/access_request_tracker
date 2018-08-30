@@ -10,6 +10,43 @@ Key learning points
     #. Use fixture to seed database *manage.py* loaddata <fixture name>
     #. Use class-based views to manage database transactions
     #. Add automated documentation using Sphinx and configure NGINX to serve the HTML
+    #. Add a REST api with minimal effort
+
+        .. code-block:: Python
+        
+            **url.py**
+            from rest_framework import routers
+            router = routers.DefaultRouter()
+            router.register(r'product', views.ProductViewSet)
+            url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),\
+
+            **views.py**
+            class ProductViewSet(viewsets.ModelViewSet):
+                queryset = Product.objects.all()
+                serializer_class = ProductSerializer
+
+            class ProtocolViewSet(viewsets.ModelViewSet):
+                queryset = Protocol
+                serializer_class = ProtocolSerializer
+
+            **serializer.py**
+            class ProtocolSerializer(serializers.ModelSerializer):
+                class Meta:
+                    model =Protocol
+                    fields='__all__'
+
+
+            class ProductSerializer(serializers.ModelSerializer):
+                protocols=ProtocolSerializer(many=True)
+
+                class Meta:
+                    model =Product
+                    fields=('id','product','protocols')
+
+
+
+
+            http://py230-ubuntu0223.westus.cloudapp.azure.com/product
 
 
 Contents
@@ -21,9 +58,8 @@ Contents
     * :ref:`host`
 
  
- The documetation below was generated automatically from the docstring and metadata about the objects
- ----------------------------------------------------------------------------------------------------------
- 
+
+
 .. _views:
 
 Views Module
