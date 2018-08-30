@@ -88,7 +88,7 @@ Serve a website in NGINX
 
 .. _api:
 
-Serve a website in NGINX 
+Add a REST API
 ------------------------------------------  
         .. code-block:: Python
 
